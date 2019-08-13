@@ -6,11 +6,14 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 3000;
 
 const config = {
-    user: 'cmbacon',
-    password: '1234',
-    server: 'localhost',
+    user: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
+    server: process.env.SQL_SERVER_NAME,
     database: 'BaconFlix_Video_Streaming_Service',
     port: 1433,
+    options: {
+        encrypt: true // Use this if you're on Windows Azure
+    },
     pool: {
         max: 10,
         min: 0,
@@ -63,6 +66,41 @@ app.get('/tvshow', function (req, res) {
     });
 });
 
+// This route updates the Subscription_ID of the specified user
+app.get('/user/:ID/edit', function(req, res) {
+    req.body.user = {
+        ID: req.params.ID,
+        Subscription_ID: null
+    };
+
+    if (req.body.user.ID == 1) {
+        req.body.user.Subscription_ID = 2;
+    }
+    else if (req.params.ID == 2) {
+        req.body.user.Subscription_ID = 3;
+    }
+    else if (req.params.ID == 3) {
+        req.body.user.Subscription_ID = 1;
+    }
+    
+    updateUser(req.body.user, (recordset) => {
+        res.redirect('/user');
+    });
+});
+
+// This route reverts all Subscription_ID fields to null
+app.get('/user/:ID/undo', function(req, res) {
+    req.body.user = {
+        ID: req.params.ID,
+        Subscription_ID: null
+    };
+    
+    updateUser(req.body.user, (recordset) => {
+        res.redirect('/user');
+    });
+});
+
+// Controller functions for SQL database
 function getList(tableName, callback) {
     var conn = new sql.ConnectionPool(config);
     conn.connect(function (err) {
@@ -73,7 +111,32 @@ function getList(tableName, callback) {
             if (err) throw err;
         
             conn.close();
+            callback(results.recordset);
+        });
+    });
+};
 
+function updateUser(reqBody, callback) {
+    var conn = new sql.ConnectionPool(config);
+    conn.connect(function (err) {
+        if (err) throw err;
+
+        let data = reqBody;    
+        let queryString = 'UPDATE [User] SET ';
+
+        if (data.Subscription_ID != null) {
+            queryString += `Subscription_ID = ${data.Subscription_ID}`;
+        } else {
+            queryString += `Subscription_ID = NULL`;
+        }
+
+        queryString += ` WHERE ID = ${data.ID};`;
+        
+        var req = new sql.Request(conn);
+        req.query(queryString, function(err, results) {       
+            if (err) throw err;
+        
+            conn.close();
             callback(results.recordset);
         });
     });

@@ -8,9 +8,8 @@ block content
             td Title
             td Release Date
             td Genre
-            td Duration
-            td Season
-            td Episode Title
+            td Duration (minutes)
+            td Network
             td Subscription Tier
         for tvShow in tvShows
             tr
@@ -19,6 +18,5 @@ block content
                 td #{tvShow.Release_Date}
                 td #{tvShow.Genre}
                 td #{tvShow.Duration}
-                td #{tvShow.Season}
-                td #{tvShow.Episode_Title}
+                td #{tvShow.Network}
                 td #{tvShow.Subscription_Tier}
