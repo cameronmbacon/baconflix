@@ -1,0 +1,31 @@
+{
+  "name": "baconflix",
+  "version": "1.0.0",
+  "description": "Final lab for IFT 201, video streaming service",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cameronmbacon/baconflix.git"
+  },
+  "author": "Cameron Bacon",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cameronmbacon/baconflix/issues"
+  },
+  "homepage": "https://github.com/cameronmbacon/baconflix#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "mssql": "^5.1.0",
+    "path": "^0.12.7",
+    "pug": "^2.0.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  }
+}

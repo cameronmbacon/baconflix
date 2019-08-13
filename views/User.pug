@@ -1,0 +1,22 @@
+extends ./index.pug
+
+block content
+    h2 Users
+    table(border=1)
+        tr
+            td ID
+            td Name
+            td Email
+            td Address
+            td Subscription ID
+            td Payment Card Number
+            td Payment Card Expiration Date
+        for user in users
+            tr
+                td #{user.ID}
+                td #{user.Name}
+                td #{user.Email}
+                td #{user.Address}
+                td #{user.Subscription_ID}
+                td #{user.Payment_Card_Number}
+                td #{user.Payment_Card_Expiration_Date}
