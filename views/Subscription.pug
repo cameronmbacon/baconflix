@@ -1,0 +1,18 @@
+extends ./index.pug
+
+block content
+    h2 Subscriptions
+    table(border=1)
+        tr
+            td ID
+            td Subscription Tier
+            td Start Date
+            td End Date
+            td Monthly Fee
+        for subscription in subscriptions
+            tr
+                td #{subscription.ID}
+                td #{subscription.Subscription_Tier}
+                td #{subscription.Start_Date}
+                td #{subscription.End_Date}
+                td #{subscription.Monthly_Fee}

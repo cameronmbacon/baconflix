@@ -1,0 +1,24 @@
+extends ./index.pug
+
+block content
+    h2 TV Shows
+    table(border=1)
+        tr
+            td ID
+            td Title
+            td Release Date
+            td Genre
+            td Duration
+            td Season
+            td Episode Title
+            td Subscription Tier
+        for tvShow in tvShows
+            tr
+                td #{tvShow.ID}
+                td #{tvShow.Title}
+                td #{tvShow.Release_Date}
+                td #{tvShow.Genre}
+                td #{tvShow.Duration}
+                td #{tvShow.Season}
+                td #{tvShow.Episode_Title}
+                td #{tvShow.Subscription_Tier}

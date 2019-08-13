@@ -1,0 +1,20 @@
+extends ./index.pug
+
+block content
+    h2 Movies
+    table(border=1)
+        tr
+            td ID
+            td Title
+            td Release Date
+            td Genre
+            td Duration
+            td Subscription Tier
+        for movie in movies
+            tr
+                td #{movie.ID}
+                td #{movie.Title}
+                td #{movie.Release_Date}
+                td #{movie.Genre}
+                td #{movie.Duration}
+                td #{movie.Subscription_Tier}
