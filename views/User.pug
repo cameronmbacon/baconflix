@@ -20,3 +20,16 @@ block content
                 td #{user.Subscription_ID}
                 td #{user.Payment_Card_Number}
                 td #{user.Payment_Card_Expiration_Date}
+    h4 Click the buttons to update the Subscription_ID of a user
+    a(href="./user/1/edit"): button(type="button") UPDATE [User] SET Subscription_ID = 2 WHERE ID = 1;
+    <br>
+    a(href="./user/2/edit"): button(type="button") UPDATE [User] SET Subscription_ID = 3 WHERE ID = 2;
+    <br>
+    a(href="./user/3/edit"): button(type="button") UPDATE [User] SET Subscription_ID = 1 WHERE ID = 3;
+    <br>
+    h4 Click the buttons to revert the Subscription_ID fields to NULL
+    a(href="./user/1/undo"): button(type="button") UPDATE [User] SET Subscription_ID = NULL WHERE ID = 1;
+    <br>
+    a(href="./user/2/undo"): button(type="button") UPDATE [User] SET Subscription_ID = NULL WHERE ID = 2;
+    <br>
+    a(href="./user/3/undo"): button(type="button") UPDATE [User] SET Subscription_ID = NULL WHERE ID = 3;
